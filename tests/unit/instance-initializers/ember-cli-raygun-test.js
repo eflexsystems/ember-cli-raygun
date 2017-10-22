@@ -1,5 +1,10 @@
 /* global Raygun */
 
+import EmberError from '@ember/error';
+
+import Application from '@ember/application';
+import { run } from '@ember/runloop';
+
 import Ember from 'ember';
 import { initializeWithConfig } from '../../../initializers/ember-cli-raygun';
 import { module, test } from 'qunit';
@@ -8,8 +13,8 @@ var application;
 
 module('Unit | Initializer | ember cli raygun', {
   beforeEach: function() {
-    Ember.run(function() {
-      application = Ember.Application.create();
+    run(function() {
+      application = Application.create();
       application.deferReadiness();
     });
   }
@@ -85,7 +90,7 @@ test('Raygun is called if we log an error with ember', function(assert) {
 
   initializeWithConfig(config);
 
-  Ember.onerror(new Ember.Error("Test Explosion!"));
+  Ember.onerror(new EmberError("Test Explosion!"));
   Raygun.send = oldSend;
 
 });

@@ -1,5 +1,10 @@
 /* global Raygun */
 
+import { on } from 'rsvp';
+
+import { merge } from '@ember/polyfills';
+import { assert } from '@ember/debug';
+
 import Ember from 'ember';
 
 export default function(config) {
@@ -7,7 +12,7 @@ export default function(config) {
   let raygunConfig = config.raygun;
 
   if (!raygunConfig || !raygunConfig.apiKey) {
-    Ember.assert("Make sure you set your Raygun API Key in config/environment.js!");
+    assert("Make sure you set your Raygun API Key in config/environment.js!");
   }
 
   if (raygunConfig.enabled) {
@@ -28,12 +33,12 @@ export default function(config) {
     }
 
     if (raygunConfig.options) {
-      initOptions = Ember.merge(initOptions, raygunConfig.options);
+      initOptions = merge(initOptions, raygunConfig.options);
     }
 
     Raygun.init(raygunConfig.apiKey,
                 initOptions,
-                Ember.merge(defaultCustomData, raygunConfig.customData)
+                merge(defaultCustomData, raygunConfig.customData)
                ).attach();
 
     Raygun.setVersion(config.APP.version);
@@ -44,7 +49,7 @@ export default function(config) {
       Raygun.send(error);
     };
 
-    Ember.RSVP.on('error', function (error) {
+    on('error', function (error) {
       Raygun.send(error);
     });
 
