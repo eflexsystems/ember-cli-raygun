@@ -24,9 +24,9 @@
     "test": "ember try:each"
   },
   "dependencies": {
-    "chalk": "^2.1.0",
+    "chalk": "^2.3.0",
     "ember-cli-babel": "^6.8.2",
-    "fs-extra": "^4.0.2",
+    "fs-extra": "^5.0.0",
     "rsvp": "^4.6.1"
   },
   "devDependencies": {
