@@ -1,5 +1,5 @@
 {
-  "name": "ember-cli-raygun",
+  "name": "eflex-ember-cli-raygun",
   "dependencies": {
     "raygun4js": "^2.7.1"
   }

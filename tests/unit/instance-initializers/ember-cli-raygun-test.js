@@ -90,7 +90,12 @@ test('Raygun is called if we log an error with ember', function(assert) {
 
   initializeWithConfig(config);
 
-  Ember.onerror(new EmberError("Test Explosion!"));
+  try {
+    Ember.onerror(new EmberError("Test Explosion!"));
+  } catch (e) {
+    // ignored
+  }
+
   Raygun.send = oldSend;
 
 });
